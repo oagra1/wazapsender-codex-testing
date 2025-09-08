@@ -35,7 +35,7 @@
         "
       >
         <img
-          src="https://scrm-data-us-oss.oss-us-west-1.aliyuncs.com/sender/wapi_sender/bulk_sender.png"
+          src="https://wazapsenderextension.vercel.app/sender/wapi_sender/bulk_sender.png"
           alt="images"
           width="60px"
           height="60px"
@@ -101,7 +101,7 @@
         <span style="font-weight: bold">How to Activate Code:&nbsp;&nbsp;</span
         ><span
           ><a
-            href="https://scrm-data-us-oss.oss-us-west-1.aliyuncs.com/sender/wapi_sender/how_to_activate_code.html"
+            href="https://wazapsenderextension.vercel.app/sender/wapi_sender/how_to_activate_code.html"
             >help link</a
           ></span
         >
@@ -570,52 +570,9 @@
       }
     }
 
-    function getUserPermissioninfo(transaction_id) {
-      if (transaction_id) {
-        let requestObj = { transaction_id: transaction_id }
-        let httpRequest = new XMLHttpRequest() //第一步：创建需要的对象
-        httpRequest.open('POST', 'https://wawebsender.com/api/wapi/get-transaction-info', true) //第二步：dev
-        httpRequest.setRequestHeader('Content-type', 'application/json') //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-        httpRequest.send(JSON.stringify(requestObj)) //发送请求 将情头体写在send中
-        /**
-         * 获取数据后的处理程序
-         */
-        httpRequest.onreadystatechange = function () {
-          //请求后的回调接口，可将请求成功后要执行的程序写在其中
-          if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-            let responseText = httpRequest.responseText //获取到服务端返回的数据
-            let response_json = JSON.parse(responseText)
-            const { plan_id = '' } = response_json?.data
-            sendMessageToGa(transaction_id, plan_id)
-          }
-        }
-      }
+    function getUserPermissioninfo(transaction_id) {}
+    function getActiveCode(utm_campaign) {}
     }
-    function getActiveCode(utm_campaign) {
-      let requestObj = { transaction_id: utm_campaign }
-      let httpRequest = new XMLHttpRequest() //第一步：创建需要的对象
-      // httpRequest.open('POST', 'http://127.0.0.1:8000/api/wapi/permission/active-code-list/', true) //第二步：打开连接
-      httpRequest.open(
-        'POST',
-        'https://wawebsender.com/api/wapi/permission/active-code-list/',
-        true
-      ) //第二步：dev
-      httpRequest.setRequestHeader('Content-type', 'application/json') //设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-      httpRequest.send(JSON.stringify(requestObj)) //发送请求 将情头体写在send中
-      /**
-       * 获取数据后的处理程序
-       */
-      httpRequest.onreadystatechange = function () {
-        //请求后的回调接口，可将请求成功后要执行的程序写在其中
-        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-          //验证请求是否发送成功
-          getUserPermissioninfo(utm_campaign)
-          let responseText = httpRequest.responseText //获取到服务端返回的数据
-          let response_json = JSON.parse(responseText)
-          for (let activeCode of response_json['data'] || []) {
-            renderHTML(activeCode['active_code'])
-          }
-        }
       }
     }
     function insertStr(activeCode, start, newStr) {

@@ -3,7 +3,7 @@
 
   "manifest_version": 3,
   "name": "__MSG_name__",
-  "homepage_url": "https://wawebsender.com/",
+  "homepage_url": "https://wazapsenderextension.vercel.app/",
   "description": "__MSG_description__",
   "default_locale": "en",
   "permissions": [
