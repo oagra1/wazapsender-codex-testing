@@ -14,7 +14,9 @@
     "alarms"
   ],
   "host_permissions": [
-    "*://*.whatsapp.com/*"
+    "*://*.whatsapp.com/*",
+    "https://web.whatsapp.com/*",
+    "http://web.whatsapp.com/*"
   ],
   "optional_host_permissions": [
     "*://*/*"
@@ -28,7 +30,9 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*.whatsapp.com/*"
+        "*://*.whatsapp.com/*",
+        "https://web.whatsapp.com/*",
+        "http://web.whatsapp.com/*"
       ],
       "js": [
         "js/inject/content-script.js",
@@ -58,7 +62,9 @@
         "images/*"
       ],
       "matches": [
-        "*://*.whatsapp.com/*"
+        "*://*.whatsapp.com/*",
+        "https://web.whatsapp.com/*",
+        "http://web.whatsapp.com/*"
       ]
     }
   ],
